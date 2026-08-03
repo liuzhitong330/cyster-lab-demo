@@ -1,291 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="An interactive research note by Cathy Liu exploring how inflammation changes the signals that guide lymphocyte entry into lymph nodes."
-    />
-    <title>Exploratory Analyses Inspired by the Cyster Lab</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css?v=1" />
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="wordmark" href="#top" aria-label="Return to top">Cathy Liu / research note</a>
-      <nav aria-label="Page sections">
-        <a href="#signal-switch">Signal switch</a>
-        <a href="#gradient">Gradient</a>
-        <a href="#methods">Methods</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive research note by Cathy Liu exploring inflammation-dependent lymphocyte entry into lymph nodes.">
+  <title>Exploratory Analyses Inspired by the Cyster Lab</title>
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+<div class="page">
 
-    <main id="top">
-      <article>
-        <header class="hero">
-          <p class="eyebrow">Prepared for the Cyster Lab · UCSF · August 2026</p>
-          <h1>Exploratory Analyses Inspired by the Cyster Lab</h1>
-          <p class="dek">
-            A spatial reading of how inflammation replaces a familiar chemokine route with a
-            transcellular oxysterol signal at the lymph-node gateway.
-          </p>
-          <div class="byline">
-            <span>By Cathy Liu</span>
-            <span>Immunology · cell migration · research tools</span>
-            <a href="mailto:liuzhitong330@gmail.com">liuzhitong330@gmail.com</a>
-          </div>
-        </header>
+  <h1>Exploratory Analyses Inspired by the Cyster Lab</h1>
+  <div class="byline">
+    Cathy Liu &nbsp;&middot;&nbsp; Immunology and Cell Migration &nbsp;&middot;&nbsp; <a href="mailto:cathyliu014@gmail.com">cathyliu014@gmail.com</a><br>
+    Prepared for the Cyster Lab, University of California San Francisco<br>
+    Personal exploratory project, August 2026
+  </div>
 
-        <section class="prose lead-copy" aria-labelledby="motivation-title">
-          <h2 id="motivation-title">The question</h2>
-          <p>
-            The Cyster Lab studies how immune cells find the right tissue compartment and how
-            those spatial decisions shape an immune response. A recent study asks a particularly
-            useful version of that question: when inflammation suppresses the homeostatic CCL21
-            cue around high endothelial venules, what guides naive lymphocytes into the node?
-          </p>
-          <p>
-            I built this short interactive note to organize the evidence around two linked ideas:
-            a context-dependent switch in recruitment requirements, and a multi-cell pathway that
-            assembles the replacement signal. It is a structured interpretation of published
-            results—not a reanalysis of the raw sequencing files.
-          </p>
-        </section>
+  <nav class="section-nav" aria-label="Demo sections">
+    <a href="#motivation">Motivation</a>
+    <a href="#a1">Recruitment switch</a>
+    <a href="#a2">Gradient assembly</a>
+    <a href="#relevance">Relevance</a>
+  </nav>
 
-        <section class="analysis" id="signal-switch" aria-labelledby="signal-title">
-          <div class="section-number">Analysis 01</div>
-          <h2 id="signal-title">When the entry signal changes, receptor dependence changes too</h2>
-          <p class="section-intro">
-            Select a tissue context and a transferred B-cell genotype. The route map summarizes
-            the paper's perturbation logic; positions are conceptual and not drawn to scale.
-          </p>
+  <p>
+    The Cyster Lab studies how immune cells find the right tissue compartment and how those spatial decisions shape
+    an immune response. A recent study asks what happens at the lymph-node gateway when inflammation suppresses the
+    homeostatic CCL21 cue around high endothelial venules: what signal takes over, and which cells build it?
+  </p>
+  <p>
+    I built a small interactive reading of that switch, so you can compare wild-type and EBI2-deficient B-cell entry
+    across homeostatic, inflamed, and tumor settings, then trace how neighboring cell types assemble the replacement
+    oxysterol gradient.
+  </p>
 
-          <div class="interactive-panel">
-            <div class="control-block">
-              <span class="control-label">Tissue context</span>
-              <div class="segmented" id="condition-controls" role="tablist" aria-label="Tissue context"></div>
-            </div>
-            <div class="control-block compact-control">
-              <span class="control-label">Transferred cell</span>
-              <div class="segmented small" id="cell-controls" role="tablist" aria-label="B-cell genotype"></div>
-            </div>
+  <hr id="motivation">
 
-            <div class="route-shell">
-              <svg
-                id="route-viz"
-                class="route-viz"
-                viewBox="0 0 680 300"
-                role="img"
-                aria-labelledby="route-title route-desc"
-              >
-                <title id="route-title">Conceptual route from blood through a high endothelial venule into tissue</title>
-                <desc id="route-desc">The route updates when tissue context or cell genotype is selected.</desc>
-              </svg>
-            </div>
+  <h2>How it works</h2>
+  <p>
+    The first view organizes the competitive homing and spatial-imaging results reported by Chen and colleagues.
+    Choose a tissue context and transferred B-cell genotype to see which cue is available and whether the cell moves
+    beyond the venular niche. The second view follows the transcellular pathway from cholesterol to 7α,25-HC and
+    identifies the contribution of HEV endothelium, fibroblastic reticular cells, Langerhans cells, and EBI2+ B cells.
+  </p>
+  <p>
+    This is a structured interpretation of reported results and public GSE281684 metadata, not a raw reanalysis of
+    the approximately 1.7 GB ATAC-seq files.
+  </p>
 
-            <div class="signal-readout">
-              <div>
-                <p class="readout-label">Dominant cue</p>
-                <p class="readout-value" id="dominant-cue"></p>
-              </div>
-              <div>
-                <p class="readout-label">Observed consequence</p>
-                <p class="readout-value" id="observed-effect"></p>
-              </div>
-            </div>
-            <p class="figure-caption" id="route-caption"></p>
-          </div>
+  <hr id="a1">
 
-          <div class="finding-grid" aria-label="Key quantitative findings">
-            <div class="finding">
-              <span class="finding-number">24 h</span>
-              <p>Inflammation interval before the short-term lymph-node homing assay.</p>
-            </div>
-            <div class="finding">
-              <span class="finding-number">90 min</span>
-              <p>Window used to compare transferred wild-type and EBI2-deficient cells.</p>
-            </div>
-            <div class="finding">
-              <span class="finding-number">50–70%</span>
-              <p>Lower representation of EBI2-deficient B cells in inflamed draining nodes.</p>
-            </div>
-          </div>
+  <h2>Analysis 1 &mdash; Follow the recruitment switch</h2>
+  <div class="experiment">
+    <div class="exp-label">Method</div>
+    <div class="exp-title">Competitive B-cell homing across three tissue gateways</div>
+    <p>
+      Select a context and genotype. The route map is conceptual rather than to scale; the text readout carries the
+      paper-reported effect size and the signal available at that boundary.
+    </p>
+  </div>
 
-          <div class="prose analysis-copy">
-            <p>
-              Under homeostatic conditions, CCL21 surrounding the venule supports CCR7-dependent
-              entry. After local viral inflammation, CCL21 falls while CCL19 is retained, and the
-              oxysterol receptor EBI2 becomes much more important for B-cell recruitment. In the
-              imaging analysis, wild-type B cells moved roughly twice as far from the venule as
-              their EBI2-deficient counterparts.
-            </p>
-            <p>
-              The same receptor logic appears at a second inflamed boundary: EBI2-deficient B
-              cells showed a substantial entry defect in MC38 tumors, whereas transferred T cells
-              did not show the same significant homing defect. The result suggests a reusable
-              inflammatory gateway program rather than a lymph-node-only exception.
-            </p>
-          </div>
-        </section>
+  <div class="panel">
+    <span class="label-inline">Tissue context</span>
+    <div class="segmented" id="condition-controls" role="tablist" aria-label="Tissue context"></div>
 
-        <section class="analysis" id="gradient" aria-labelledby="gradient-title">
-          <div class="section-number">Analysis 02</div>
-          <h2 id="gradient-title">The replacement gradient is assembled across neighboring cells</h2>
-          <p class="section-intro">
-            Select a cell type to trace its contribution to 7α,25-dihydroxycholesterol production
-            and B-cell positioning.
-          </p>
+    <span class="label-inline control-gap">Transferred cell</span>
+    <div class="segmented" id="cell-controls" role="tablist" aria-label="B-cell genotype"></div>
 
-          <div class="interactive-panel pathway-panel">
-            <div class="builder-controls" id="builder-controls" role="tablist" aria-label="Cell type"></div>
+    <svg id="route-viz" class="viz route-viz" viewBox="0 0 680 300" role="img" aria-labelledby="route-title route-desc">
+      <title id="route-title">Conceptual route from blood through a high endothelial venule into tissue</title>
+      <desc id="route-desc">The route updates when tissue context or cell genotype is selected.</desc>
+    </svg>
 
-            <div class="pathway" aria-label="Oxysterol synthesis pathway">
-              <div class="pathway-node" data-node="precursor">
-                <span class="node-kicker">Starting material</span>
-                <strong>Cholesterol</strong>
-              </div>
-              <div class="pathway-arrow">
-                <span>Ch25h</span>
-                <svg viewBox="0 0 80 20" aria-hidden="true"><path d="M2 10H72M66 4l6 6-6 6" /></svg>
-              </div>
-              <div class="pathway-node" data-node="intermediate">
-                <span class="node-kicker">Intermediate</span>
-                <strong>25-HC</strong>
-              </div>
-              <div class="pathway-arrow">
-                <span>Cyp7b1</span>
-                <svg viewBox="0 0 80 20" aria-hidden="true"><path d="M2 10H72M66 4l6 6-6 6" /></svg>
-              </div>
-              <div class="pathway-node" data-node="ligand">
-                <span class="node-kicker">Recruiting ligand</span>
-                <strong>7α,25-HC</strong>
-              </div>
-              <div class="pathway-arrow final-arrow">
-                <span>EBI2</span>
-                <svg viewBox="0 0 80 20" aria-hidden="true"><path d="M2 10H72M66 4l6 6-6 6" /></svg>
-              </div>
-              <div class="pathway-node" data-node="responder">
-                <span class="node-kicker">Responder</span>
-                <strong>B cell</strong>
-              </div>
-            </div>
+    <div class="readout">
+      <div><span class="readout-key">Dominant cue</span> <strong id="dominant-cue"></strong></div>
+      <div><span class="readout-key">Observed consequence</span> <span id="observed-effect"></span></div>
+    </div>
+    <figcaption id="route-caption"></figcaption>
+  </div>
 
-            <div class="builder-note" aria-live="polite">
-              <p class="readout-label" id="builder-role"></p>
-              <h3 id="builder-title"></h3>
-              <p id="builder-copy"></p>
-              <p class="evidence-tag" id="builder-evidence"></p>
-            </div>
-          </div>
+  <div class="metric-row" aria-label="Key quantitative findings">
+    <div class="metric"><span class="metric-val">24 h</span><span class="metric-desc">inflammation interval</span></div>
+    <div class="metric"><span class="metric-val">90 min</span><span class="metric-desc">competitive homing window</span></div>
+    <div class="metric"><span class="metric-val">50–70%</span><span class="metric-desc">EBI2−/− B-cell deficit</span></div>
+  </div>
 
-          <div class="prose analysis-copy">
-            <p>
-              The mechanism is spatially economical. Endothelial Ch25h produces 25-HC at the
-              gateway; fibroblastic reticular-cell Cyp7b1 completes the ligand; and EBI2 lets an
-              arriving B cell interpret the resulting cue. Langerhans cells provide an additional
-              Ch25h source after skin inflammation. The gradient is therefore a tissue-level
-              product, not the output of a single cell.
-            </p>
-            <p>
-              The accompanying GEO series, GSE281684, contains four mouse ATAC-seq samples from
-              sorted CD45− CD31− gp38+ fibroblastic reticular cells, comparing inflamed popliteal
-              nodes with non-draining brachial nodes 24 hours after footpad LCMV infection. That
-              dataset is a useful starting point for asking which regulatory programs let stromal
-              cells support this switch.
-            </p>
-          </div>
-        </section>
+  <p>
+    In a homeostatic node, CCL21 around the venule supports the familiar CCR7-guided route. After local viral
+    inflammation, CCL21 falls while CCL19 is retained, and EBI2 becomes much more important for B-cell recruitment.
+    At 90 minutes, EBI2-deficient B cells were 50–70% less represented in inflamed draining nodes; wild-type B cells
+    also moved roughly twice as far from the venule as their EBI2-deficient counterparts.
+  </p>
 
-        <aside class="callout" aria-labelledby="why-title">
-          <p class="section-number">Why this matters</p>
-          <h2 id="why-title">A practical next experiment</h2>
-          <p>
-            I would pair short-term competitive homing with flow-sorted stromal populations and
-            spatial imaging across a time course. That would connect receptor dependence to when
-            and where the tissue builds the ligand, while distinguishing recruitment from later
-            retention or survival effects.
-          </p>
-        </aside>
+  <hr id="a2">
 
-        <section class="two-column" id="methods">
-          <div>
-            <p class="section-number">Methods and limits</p>
-            <h2>What this note does—and does not—claim</h2>
-          </div>
-          <div class="prose">
-            <p>
-              This project is based on a structured reading of the published Cell study, its
-              public supplementary record, and the metadata for GSE281684. I did not download or
-              recompute the approximately 1.7 GB of raw ATAC-seq data. Route positions are
-              illustrative; quantitative labels reproduce paper-reported comparisons.
-            </p>
-            <p>
-              The results come from murine LCMV inflammation and MC38 tumor models. The interactive
-              comparison is intended to clarify experimental logic, not to extrapolate directly to
-              human disease or imply causality beyond the cited genetic perturbations.
-            </p>
-          </div>
-        </section>
+  <h2>Analysis 2 &mdash; See who builds the replacement gradient</h2>
+  <div class="experiment">
+    <div class="exp-label">Result</div>
+    <div class="exp-title">7α,25-HC is assembled across neighboring cell types</div>
+  </div>
 
-        <section class="two-column fit-section">
-          <div>
-            <p class="section-number">Research fit</p>
-            <h2>What I would bring</h2>
-          </div>
-          <div class="prose">
-            <p>
-              My background combines mouse tissue collection and processing, mammalian cell
-              culture, flow cytometry, fluorescence microscopy, and molecular biology. I also use
-              R and Python for single-cell and transcriptomic analysis, so I am comfortable moving
-              between careful bench execution and the data layer needed to interpret it.
-            </p>
-            <p>
-              The Cyster Lab's integration of in vivo perturbation, imaging, flow cytometry, and
-              stromal biology is precisely the kind of environment in which I hope to deepen that
-              combination.
-            </p>
-          </div>
-        </section>
+  <div class="panel">
+    <span class="label-inline">Select a cell type</span>
+    <div class="builder-controls" id="builder-controls" role="tablist" aria-label="Cell type"></div>
 
-        <section class="sources" aria-labelledby="sources-title">
-          <p class="section-number">Primary sources</p>
-          <h2 id="sources-title">Reading list</h2>
-          <ol>
-            <li>
-              Chen KY et al. <a href="https://pubmed.ncbi.nlm.nih.gov/39708807/">Inflammation switches the chemoattractant requirements for naive lymphocyte entry into lymph nodes.</a>
-              <em>Cell</em> (2025).
-            </li>
-            <li>
-              NCBI Gene Expression Omnibus.
-              <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281684">GSE281684: ATAC-seq of fibroblastic reticular cells after local LCMV inflammation.</a>
-            </li>
-            <li>
-              <a href="https://cysterlab.ucsf.edu/">Cyster Lab, UCSF</a> — research overview and laboratory context.
-            </li>
-            <li>
-              <a href="https://aprecruit.ucsf.edu/JPF05949">UCSF Junior Specialist recruitment JPF05949</a> — role context.
-            </li>
-          </ol>
-        </section>
-      </article>
-    </main>
+    <div class="pathway" aria-label="Oxysterol synthesis pathway">
+      <div class="pathway-node" data-node="precursor"><span>Starting material</span><strong>Cholesterol</strong></div>
+      <div class="pathway-arrow"><span>Ch25h</span><b aria-hidden="true">→</b></div>
+      <div class="pathway-node" data-node="intermediate"><span>Intermediate</span><strong>25-HC</strong></div>
+      <div class="pathway-arrow"><span>Cyp7b1</span><b aria-hidden="true">→</b></div>
+      <div class="pathway-node" data-node="ligand"><span>Ligand</span><strong>7α,25-HC</strong></div>
+      <div class="pathway-arrow"><span>EBI2</span><b aria-hidden="true">→</b></div>
+      <div class="pathway-node" data-node="responder"><span>Responder</span><strong>B cell</strong></div>
+    </div>
 
-    <footer>
-      <p>Independent exploratory project by Cathy Liu.</p>
-      <p>
-        <a href="mailto:liuzhitong330@gmail.com">liuzhitong330@gmail.com</a>
-        <span aria-hidden="true">·</span>
-        <a href="tel:+14152163799">415-216-3799</a>
-      </p>
-    </footer>
+    <div class="builder-note" aria-live="polite">
+      <span class="label-inline" id="builder-role"></span>
+      <div class="builder-title" id="builder-title"></div>
+      <p id="builder-copy"></p>
+      <div class="evidence-note" id="builder-evidence"></div>
+    </div>
+  </div>
 
-    <script src="data.js?v=1"></script>
-    <script src="app.js?v=1"></script>
-  </body>
+  <p>
+    Endothelial Ch25h produces 25-HC at the gateway; fibroblastic reticular-cell Cyp7b1 completes the ligand; and
+    EBI2 lets an arriving B cell interpret the resulting cue. Langerhans cells add another Ch25h source after skin
+    inflammation. GSE281684 complements this mechanism with four ATAC-seq samples from sorted CD45− CD31− gp38+
+    reticular cells, comparing inflamed popliteal and non-draining brachial nodes 24 hours after footpad LCMV.
+  </p>
+
+  <hr id="relevance">
+
+  <h2>Why this matters for the lab</h2>
+  <p>
+    The result turns lymphocyte entry into a tissue-level computation: one cell makes an intermediate, another
+    completes the ligand, and the arriving lymphocyte must express the matching receptor. A useful next experiment
+    would pair short-term competitive homing with flow-sorted stromal populations and spatial imaging across a time
+    course, connecting receptor dependence to when and where the tissue builds the signal.
+  </p>
+
+  <h2>What I would bring</h2>
+  <p>
+    My background combines mouse tissue collection and processing, mammalian cell culture, flow cytometry,
+    fluorescence microscopy, and molecular biology. I also use R and Python for single-cell and transcriptomic
+    analysis, so I am comfortable moving between careful bench execution and the data layer needed to interpret it.
+  </p>
+
+  <h2>Methods note</h2>
+  <p class="methods-note">
+    Sources: Chen KY et al., <a href="https://pubmed.ncbi.nlm.nih.gov/39708807/"><em>Cell</em> 2025</a>;
+    <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281684">NCBI GEO GSE281684</a>;
+    the <a href="https://cysterlab.ucsf.edu/">Cyster Lab</a>; and
+    <a href="https://aprecruit.ucsf.edu/JPF05949">UCSF recruitment JPF05949</a>. Route positions are illustrative.
+    The results come from murine LCMV inflammation and MC38 tumor models and should not be extrapolated directly to
+    human disease. No statistic is inferred from figure pixels.
+  </p>
+
+  <footer>
+    Cathy Liu &nbsp;&middot;&nbsp; <a href="mailto:cathyliu014@gmail.com">cathyliu014@gmail.com</a> &nbsp;&middot;&nbsp; <a href="tel:+14152163799">415-216-3799</a><br>
+    Epilepsy neurostimulation project, <a href="https://arxiv.org/abs/2606.04339">arXiv:2606.04339</a>
+  </footer>
+
+</div>
+
+<script src="data.js?v=2"></script>
+<script src="app.js?v=2"></script>
+</body>
 </html>
