@@ -132,6 +132,29 @@ figcaption {
   margin-top: .6rem;
   line-height: 1.45;
 }
+.value-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: .9rem;
+  border-top: 1px solid #dfe4e1;
+  font-family: system-ui, sans-serif;
+}
+.value-box span,
+.planner-row > span,
+.planner-grid span {
+  display: block;
+  margin-bottom: .28rem;
+  color: #607074;
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.value-box p,
+.planner-row p,
+.planner-grid p { margin: 0; color: #414947; font-size: .78rem; line-height: 1.5; }
 
 .metric-row {
   display: flex;
@@ -170,7 +193,7 @@ figcaption {
 .pathway-node.active { border-color: var(--accent); background: #e6f1f3; }
 .pathway-arrow { color: #777; text-align: center; font: .56rem/1.2 system-ui, sans-serif; }
 .pathway-arrow b { display: block; color: var(--accent); font-size: 1rem; font-weight: normal; }
-.builder-note { padding-top: 1rem; min-height: 190px; }
+.builder-note { padding-top: 1rem; }
 .builder-title { font-weight: bold; font-size: 1rem; margin-bottom: .45rem; }
 .builder-note p { font-size: .92rem; margin-bottom: .65rem; }
 .evidence-note {
@@ -178,6 +201,24 @@ figcaption {
   padding-left: .7rem;
   color: #666;
   font: .78rem/1.5 system-ui, sans-serif;
+}
+.planner-row,
+.planner-grid {
+  margin-top: .9rem;
+  padding-top: .8rem;
+  border-top: 1px solid #e2e5e3;
+  font-family: system-ui, sans-serif;
+}
+.planner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.builder-note .planner-row p,
+.builder-note .planner-grid p,
+.builder-note .planner-value p { margin: 0; color: #414947; font-size: .78rem; line-height: 1.5; }
+.decisive-row { border-left: 2px solid var(--accent); padding-left: .7rem; }
+.planner-value {
+  margin-top: 1rem;
+  padding: .8rem;
+  border: 0;
+  background: #eef5f5;
 }
 .methods-note { font-size: .9rem; color: #444; }
 footer {
@@ -198,5 +239,7 @@ footer {
   .pathway { grid-template-columns: 1fr; }
   .pathway-arrow { min-height: 24px; }
   .pathway-arrow b { transform: rotate(90deg); }
+  .value-box,
+  .planner-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
