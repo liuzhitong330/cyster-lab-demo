@@ -20,7 +20,7 @@
   <nav class="section-nav" aria-label="Demo sections">
     <a href="#motivation">Motivation</a>
     <a href="#a1">Recruitment switch</a>
-    <a href="#a2">Gradient assembly</a>
+    <a href="#a2">Experiment planner</a>
     <a href="#relevance">Relevance</a>
   </nav>
 
@@ -30,9 +30,9 @@
     homeostatic CCL21 cue around high endothelial venules: what signal takes over, and which cells build it?
   </p>
   <p>
-    I built a small interactive reading of that switch, so you can compare wild-type and EBI2-deficient B-cell entry
-    across homeostatic, inflamed, and tumor settings, then trace how neighboring cell types assemble the replacement
-    oxysterol gradient.
+    I built a small interactive tool that first compares wild-type and EBI2-deficient B-cell entry across homeostatic,
+    inflamed, and tumor settings, then turns each mechanistic node into a follow-up experiment with a matched
+    perturbation, control, readout, and discriminating outcome.
   </p>
 
   <hr id="motivation">
@@ -41,8 +41,9 @@
   <p>
     The first view organizes the competitive homing and spatial-imaging results reported by Chen and colleagues.
     Choose a tissue context and transferred B-cell genotype to see which cue is available and whether the cell moves
-    beyond the venular niche. The second view follows the transcellular pathway from cholesterol to 7α,25-HC and
-    identifies the contribution of HEV endothelium, fibroblastic reticular cells, Langerhans cells, and EBI2+ B cells.
+    beyond the venular niche. The second view follows the transcellular pathway from cholesterol to 7α,25-HC, but
+    uses it as an experiment planner: select HEV endothelium, fibroblastic reticular cells, Langerhans cells, or EBI2+
+    B cells to generate a proposal that distinguishes production, completion, and receptor sensing.
   </p>
   <p>
     This is a structured interpretation of reported results and public GSE281684 metadata, not a raw reanalysis of
@@ -78,6 +79,11 @@
       <div><span class="readout-key">Observed consequence</span> <span id="observed-effect"></span></div>
     </div>
     <figcaption id="route-caption"></figcaption>
+
+    <div class="value-box">
+      <div><span>What this lets the lab do</span><p>Compare where EBI2 dependence becomes decisive and choose the tissue context most likely to separate recruitment from later positioning.</p></div>
+      <div><span>Where Cathy adds value</span><p>I connected competitive-flow and spatial-imaging evidence in one reusable view, drawing on my mouse tissue, flow cytometry, microscopy, and analysis experience.</p></div>
+    </div>
   </div>
 
   <div class="metric-row" aria-label="Key quantitative findings">
@@ -95,15 +101,19 @@
 
   <hr id="a2">
 
-  <h2>Analysis 2 &mdash; See who builds the replacement gradient</h2>
+  <h2>Analysis 2 &mdash; Plan the experiment that separates each step</h2>
   <div class="experiment">
-    <div class="exp-label">Result</div>
-    <div class="exp-title">7α,25-HC is assembled across neighboring cell types</div>
+    <div class="exp-label">Follow-up experiment planner</div>
+    <div class="exp-title">Turn each mechanistic node into a perturbation, control, and discriminating readout</div>
+    <p>
+      The proposals below are not reported results. They use the published mechanism to identify the next experiment
+      that would most clearly separate ligand production, ligand completion, and receptor sensing.
+    </p>
   </div>
 
   <div class="panel">
-    <span class="label-inline">Select a cell type</span>
-    <div class="builder-controls" id="builder-controls" role="tablist" aria-label="Cell type"></div>
+    <span class="label-inline">Choose a mechanistic node</span>
+    <div class="builder-controls" id="builder-controls" role="tablist" aria-label="Mechanistic node"></div>
 
     <div class="pathway" aria-label="Oxysterol synthesis pathway">
       <div class="pathway-node" data-node="precursor"><span>Starting material</span><strong>Cholesterol</strong></div>
@@ -120,14 +130,35 @@
       <div class="builder-title" id="builder-title"></div>
       <p id="builder-copy"></p>
       <div class="evidence-note" id="builder-evidence"></div>
+
+      <div class="planner-row">
+        <span>Open question</span>
+        <p id="builder-gap"></p>
+      </div>
+      <div class="planner-row">
+        <span>Proposed follow-up</span>
+        <p id="builder-experiment"></p>
+      </div>
+      <div class="planner-grid">
+        <div><span>Primary readout</span><p id="builder-readout"></p></div>
+        <div><span>Critical controls</span><p id="builder-control"></p></div>
+      </div>
+      <div class="planner-row decisive-row">
+        <span>Discriminating outcome</span>
+        <p id="builder-decisive"></p>
+      </div>
+      <div class="value-box planner-value">
+        <div><span>What this lets the lab do</span><p id="builder-lab-value"></p></div>
+        <div><span>Where Cathy adds value</span><p id="builder-cathy-value"></p></div>
+      </div>
     </div>
   </div>
 
   <p>
-    Endothelial Ch25h produces 25-HC at the gateway; fibroblastic reticular-cell Cyp7b1 completes the ligand; and
-    EBI2 lets an arriving B cell interpret the resulting cue. Langerhans cells add another Ch25h source after skin
-    inflammation. GSE281684 complements this mechanism with four ATAC-seq samples from sorted CD45− CD31− gp38+
-    reticular cells, comparing inflamed popliteal and non-draining brachial nodes 24 hours after footpad LCMV.
+    The planner keeps the evidence and proposal separate. Endothelial Ch25h produces 25-HC, FRC Cyp7b1 completes the
+    ligand, and EBI2 lets the B cell interpret it; GSE281684 adds four public FRC ATAC-seq samples. The useful next
+    step is not another mechanism diagram, but a matched experiment in which the perturbation, control, and readout
+    reveal which part of the spatial handoff failed.
   </p>
 
   <hr id="relevance">
@@ -164,7 +195,7 @@
 
 </div>
 
-<script src="data.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="data.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
