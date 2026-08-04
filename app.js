@@ -129,6 +129,13 @@
     document.getElementById("builder-title").textContent = builder.title;
     document.getElementById("builder-copy").textContent = builder.copy;
     document.getElementById("builder-evidence").textContent = builder.evidence;
+    document.getElementById("builder-gap").textContent = builder.gap;
+    document.getElementById("builder-experiment").textContent = builder.experiment;
+    document.getElementById("builder-readout").textContent = builder.readout;
+    document.getElementById("builder-control").textContent = builder.control;
+    document.getElementById("builder-decisive").textContent = builder.decisive;
+    document.getElementById("builder-lab-value").textContent = builder.labValue;
+    document.getElementById("builder-cathy-value").textContent = builder.cathyValue;
 
     document.querySelectorAll(".pathway-node").forEach((node) => {
       node.classList.toggle("active", builder.activeNodes.includes(node.dataset.node));
